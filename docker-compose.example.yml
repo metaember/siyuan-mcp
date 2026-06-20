@@ -1,0 +1,15 @@
+# Drop-in replacement for the `siyuan-mcp` service in the airlock compose.
+# Same env contract and the same `/mcp` streamable-HTTP endpoint on port 8000.
+services:
+  siyuan-mcp:
+    build: .
+    # Or, once published: image: your-registry/siyuan-mcp:0.1.0
+    environment:
+      SIYUAN_API_URL: http://siyuan:6806
+      SIYUAN_API_TOKEN: ${SIYUAN_API_TOKEN:?set SIYUAN_API_TOKEN}
+    expose:
+      - "8000"
+    # The airlock gateway connects to http://siyuan-mcp:8000/mcp. DNS-rebinding
+    # protection is disabled in the server, so the forwarded
+    # `Host: siyuan-mcp:8000` header is accepted.
+    restart: unless-stopped

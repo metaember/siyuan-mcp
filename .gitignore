@@ -1,0 +1,15 @@
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Virtual envs
+.venv/
+
+# Caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Reference clone (kept locally for API reference, not part of this project)
+reference/
